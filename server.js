@@ -3,12 +3,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ⭐ TUS FRASES PERSONALIZADAS
-// ⭐ TUS FRASES PERSONALIZADAS
 const frases = [
     {
         _id: "1",
@@ -23,13 +20,6 @@ const frases = [
         author: "Jordi Cordomí",
         tags: ["vino", "humor"],
         length: 64
-    },
-    {
-        _id: "6",
-        content: "Se estaba ahogando",
-        author: "Jordi Cordomí",
-        tags: ["cerveza", "humor"],
-        length: 18
     },
     {
         _id: "7",
@@ -122,20 +112,24 @@ const frases = [
         tags: ["alcohol", "humor"],
         length: 49
     },
+    {
+        _id: "24",
+        content: "Voll-Dommí, la única rubia que no quiero caliente",
+        author: "Jordi Cordomí",
+        tags: ["alcohol", "humor"],
+        length: 49
+    },
 ];
 
-// GET /api/random - Frase aleatoria
 app.get('/api/random', (req, res) => {
     const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
     res.json(fraseAleatoria);
 });
 
-// GET /api/quotes - Todas las frases
 app.get('/api/quotes', (req, res) => {
     res.json(frases);
 });
 
-// GET /api/quotes/:id - Frase por ID
 app.get('/api/quotes/:id', (req, res) => {
     const frase = frases.find(f => f._id === req.params.id);
     if (frase) {
@@ -145,7 +139,6 @@ app.get('/api/quotes/:id', (req, res) => {
     }
 });
 
-// Root endpoint
 app.get('/', (req, res) => {
     res.json({
         message: 'API de Frases de Voll-Dommí',
@@ -158,6 +151,6 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 API corriendo en puerto ${PORT}`);
-    console.log(`📍 http://localhost:${PORT}`);
+    console.log(`API corriendo en puerto ${PORT}`);
+    console.log(`http://localhost:${PORT}`);
 });
